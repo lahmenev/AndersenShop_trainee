@@ -20,7 +20,7 @@ public class ShopTest {
     private Bucket bucket;
 
     /**
-     * Initialize method for testing
+     * Initialize method for testing 
      */
     @Before
     public void init() {
