@@ -1,4 +1,4 @@
-package task_2.shop.controller;
+package task_3.shop.controller;
 
 /**
  * email : s.lakhmenev@andersenlab.com

@@ -1,6 +1,7 @@
-package task_2.shop.controller.proxy;
+package task_3.shop.controller.proxy;
 
-import task_2.shop.model.Stock;
+import task_3.shop.model.Stock;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

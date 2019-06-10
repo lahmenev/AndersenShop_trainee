@@ -1,4 +1,4 @@
-package task_2.shop.model;
+package task_3.shop.model;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -8,7 +8,7 @@ package task_2.shop.model;
  */
 public class NonFoodProduct extends Product {
 
-    public NonFoodProduct(String name, Currency currency, int price, int amount) {
+    public NonFoodProduct(String name, String currency, int price, int amount) {
         super(name, currency, price, amount);
     }
 }

@@ -1,4 +1,4 @@
-package task_2.shop.model.strategies;
+package task_3.shop.model.strategies;
 
 /**
  * email : s.lakhmenev@andersenlab.com

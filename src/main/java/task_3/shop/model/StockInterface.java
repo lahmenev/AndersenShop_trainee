@@ -1,4 +1,4 @@
-package task_2.shop.model;
+package task_3.shop.model;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -21,20 +21,6 @@ public interface StockInterface {
     void displayProducts();
 
     /**
-     * Removes product from stock
-     *
-     * @param id identify of product
-     */
-    void delFromStock(int id);
-
-    /**
-     * Gets size of stock
-     *
-     * @return size of stock
-     */
-    int getSize();
-
-    /**
      * Gets price of product by id
      *
      * @param id identify of product
@@ -46,9 +32,9 @@ public interface StockInterface {
      * Gets currency of product by id
      *
      * @param id identify of product
-     * @return Currency object
+     * @return currancy string
      */
-    Currency getCurrencyById(int id);
+    String getCurrencyNameById(int id);
 
     /**
      * Gets name of product by id

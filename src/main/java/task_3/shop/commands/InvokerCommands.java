@@ -1,4 +1,4 @@
-package task_2.shop.commands;
+package task_3.shop.commands;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -12,14 +12,16 @@ public class InvokerCommands {
     private Command addToBucketCommand;
     private Command delFromBucketCommand;
     private Command clearBucketCommand;
+    private Command showUserInfo;
 
     public InvokerCommands(Command displayProductsCommand, Command displayBucketCommand, Command addToBucketCommand,
-                           Command delFromBucketCommand, Command clearBucketCommand) {
+                           Command delFromBucketCommand, Command clearBucketCommand, Command showUserInfo) {
         this.displayProductsCommand = displayProductsCommand;
         this.displayBucketCommand = displayBucketCommand;
         this.addToBucketCommand = addToBucketCommand;
         this.delFromBucketCommand = delFromBucketCommand;
         this.clearBucketCommand = clearBucketCommand;
+        this.showUserInfo = showUserInfo;
     }
 
     /**
@@ -55,5 +57,9 @@ public class InvokerCommands {
      */
     public void clearBucket() {
         clearBucketCommand.execute();
+    }
+
+    public void showUserInfo() {
+        showUserInfo.execute();
     }
 }

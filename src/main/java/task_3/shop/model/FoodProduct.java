@@ -1,6 +1,6 @@
-package task_2.shop.model;
+package task_3.shop.model;
 
-import task_2.shop.controller.proxy.ProductValid;
+import task_3.shop.controller.proxy.ProductValid;
 import java.time.LocalDate;
 
 /**
@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * @version 1.1
  */
 public class FoodProduct extends Product {
-    private Currency currency;
+    private String currency;
     private String name;
     private int id;
     private int price;
@@ -19,7 +19,7 @@ public class FoodProduct extends Product {
     @ProductValid
     private LocalDate validUntil;
 
-    public FoodProduct(String name, Currency currency, int price, int amount) {
+    public FoodProduct(String name, String currency, int price, int amount) {
         super(name, currency, price, amount);
         this.name = name;
         this.currency = currency;
@@ -35,7 +35,7 @@ public class FoodProduct extends Product {
                 ", name = '" + name + '\'' +
                 ", price = " + price +
                 ", amount = " + amount +
-                ", currency = " + currency.getCurrencyName() + ", годен до " + validUntil +
+                ", currency = " + currency + ", годен до " + validUntil +
                 '}';
     }
 }

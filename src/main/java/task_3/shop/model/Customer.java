@@ -1,4 +1,4 @@
-package task_2.shop.model;
+package task_3.shop.model;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -7,17 +7,25 @@ package task_2.shop.model;
  * @version 1.1
  */
 public class Customer {
+    private int id;
     private String name;
     private int money;
+    private static int counter;
     private Bucket bucket;
 
     private int idOfProductForBucket;
-    private int amountofProductForBucket;
+    private int amountOfProductForBucket;
 
     public Customer(String name, int money) {
         this.name = name;
         this.money = money;
         this.bucket = new Bucket();
+        counter++;
+        this.id = counter;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -52,11 +60,11 @@ public class Customer {
         this.idOfProductForBucket = idOfProductForBucket;
     }
 
-    public int getAmountofProductForBucket() {
-        return amountofProductForBucket;
+    public int getAmountOfProductForBucket() {
+        return amountOfProductForBucket;
     }
 
-    public void setAmountofProductForBucket(int amountofProductForBucket) {
-        this.amountofProductForBucket = amountofProductForBucket;
+    public void setAmountOfProductForBucket(int amountOfProductForBucket) {
+        this.amountOfProductForBucket = amountOfProductForBucket;
     }
 }

@@ -1,8 +1,8 @@
-package task_2.shop.commands;
+package task_3.shop.commands;
 
-import task_2.shop.model.Customer;
-import task_2.shop.model.Product;
-import task_2.shop.model.Stock;
+import task_3.shop.model.Customer;
+import task_3.shop.model.Product;
+import task_3.shop.model.Stock;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -25,16 +25,12 @@ public class AddToBucketCommand implements Command {
     @Override
     public void execute() {
         int id = customer.getIdOfProductForBucket();
-        int amountInBucket = customer.getAmountofProductForBucket();
-        Product stockProduct = stock.getStock().get(id);
+        int amountInBucket = customer.getAmountOfProductForBucket();
+        Product stockProduct = stock.getStock().get(id - 1);
         int amountInStock = stockProduct.getAmount();
 
-        customer.getBucket().addToBucket(id, new Product(stock.getNameById(id),
-                   stock.getCurrencyById(id), stock.getPriceById(id), amountInBucket));
+        customer.getBucket().addToBucket(id, customer, new Product(stockProduct.getName(),
+                stockProduct.getCurrency(), stockProduct.getPrice(), amountInBucket));
         stockProduct.setAmount(amountInStock - amountInBucket);
-
-        if (stockProduct.getAmount() == 0) {
-            stock.delFromStock(id);
-        }
     }
 }

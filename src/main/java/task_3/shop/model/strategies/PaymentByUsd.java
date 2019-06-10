@@ -1,6 +1,4 @@
-package task_2.shop.model.strategies;
-
-import task_2.shop.model.Currency;
+package task_3.shop.model.strategies;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,7 +7,6 @@ import task_2.shop.model.Currency;
  * @version 1.1
  */
 public class PaymentByUsd implements CurrancyStrategy {
-    private Currency usd = new Currency("Dollar USA", 65, "USD");
 
     /**
      * Counts price for products
@@ -20,14 +17,6 @@ public class PaymentByUsd implements CurrancyStrategy {
      */
     @Override
     public int payment(int price, int amount) {
-        return price * amount * usd.getCurrencyGain();
-    }
-
-    /**
-     *
-     * @return Currency object
-     */
-    public Currency getUsd() {
-        return usd;
+        return price * amount * 65;
     }
 }

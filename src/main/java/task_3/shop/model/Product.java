@@ -1,4 +1,4 @@
-package task_2.shop.model;
+package task_3.shop.model;
 
 import java.io.Serializable;
 
@@ -14,9 +14,12 @@ public class Product implements Serializable {
     private int price;
     private int amount;
     private static int counter;
-    private Currency currency;
+    private String currency;
 
-    public Product(String name, Currency currency, int price, int amount) {
+    public Product() {
+    }
+
+    public Product(String name, String currency, int price, int amount) {
         this.name = name;
         this.currency = currency;
         this.price = price;
@@ -61,16 +64,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public boolean productIsEmpty() {
-        return amount == 0;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class Product implements Serializable {
                 ", name = '" + name + '\'' +
                 ", price = " + price +
                 ", amount = " + amount +
-                ", currency = " + currency.getCurrencyName() +
+                ", currency = " + currency +
                 '}';
     }
 }

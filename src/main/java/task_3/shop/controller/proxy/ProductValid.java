@@ -1,4 +1,4 @@
-package task_2.shop.controller.proxy;
+package task_3.shop.controller.proxy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

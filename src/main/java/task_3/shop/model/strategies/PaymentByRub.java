@@ -1,6 +1,4 @@
-package task_2.shop.model.strategies;
-
-import task_2.shop.model.Currency;
+package task_3.shop.model.strategies;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,8 +7,6 @@ import task_2.shop.model.Currency;
  * @version 1.1
  */
 public class PaymentByRub implements CurrancyStrategy {
-    private Currency rub = new Currency("Russian ruble", 1, "RUB");
-
     /**
      * Counts price for products
      *
@@ -20,14 +16,6 @@ public class PaymentByRub implements CurrancyStrategy {
      */
     @Override
     public int payment(int price, int amount) {
-        return price * amount * rub.getCurrencyGain();
-    }
-
-    /**
-     *
-     * @return Currency object
-     */
-    public Currency getRub() {
-        return rub;
+        return price * amount;
     }
 }
