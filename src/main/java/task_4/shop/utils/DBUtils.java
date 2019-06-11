@@ -1,4 +1,4 @@
-package task_3.shop.service;
+package task_4.shop.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,12 +10,12 @@ import java.sql.SQLException;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class DBConnection {
+public class DBUtils {
 
     /**
-     * Gets connection to database
+     * Gets connection with database
      *
-     * @return Connection object
+     * @return object of Connection
      */
     public static Connection getConnection() {
         String userName = "root";
