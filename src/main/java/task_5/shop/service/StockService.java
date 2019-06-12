@@ -1,12 +1,13 @@
-package task_4.shop.service;
+package task_5.shop.service;
 
-import task_4.shop.DAO.StockDAO;
-import task_4.shop.model.BucketItem;
-import task_4.shop.model.Product;
-import task_4.shop.model.strategies.CurrancyStrategy;
-import task_4.shop.model.strategies.PaymentByRub;
-import task_4.shop.model.strategies.PaymentByUsd;
-import task_4.shop.utils.DBUtils;
+import task_5.shop.DAO.StockDAO;
+import task_5.shop.model.BucketItem;
+import task_5.shop.model.Product;
+import task_5.shop.model.User;
+import task_5.shop.model.strategies.CurrancyStrategy;
+import task_5.shop.model.strategies.PaymentByRub;
+import task_5.shop.model.strategies.PaymentByUsd;
+import task_5.shop.utils.DBUtils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class StockService implements StockDAO {
 
         try (Connection connection = DBUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement("insert into products (name, currancy, price, amount)" +
-                     "values (?, ?, ?, ?)")){
+                     "values (?, ?, ?, ?)")) {
 
             statement.setString(1, product.getName());
             statement.setString(2, product.getCurrancy());
@@ -96,21 +97,24 @@ public class StockService implements StockDAO {
      * Adds product to bucket
      *
      * @param product item of products
+     * @param user    input parameter of user
      */
     @Override
-    public void addToBucket(Product product) {
+    public void addToBucket(Product product, User user) {
         int productId = product.getId();
+        String userName = user.getName();
         BucketItem bucketItem = getProductById(productId);
 
         try (Connection connection = DBUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into orders (name, currancy, price, amount, summ) " +
-                     "values (?, ?, ?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement("insert into orders (name, currancy, price, amount, summ, userName) " +
+                     "values (?, ?, ?, ?, ?, ?)")) {
 
             statement.setString(1, bucketItem.getName());
             statement.setString(2, bucketItem.getCurrancy());
             statement.setInt(3, bucketItem.getPrice());
             statement.setInt(4, bucketItem.getAmount());
             statement.setInt(5, bucketItem.getSum());
+            statement.setString(6, userName);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,7 +134,7 @@ public class StockService implements StockDAO {
 
         try (Connection connection = DBUtils.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("select * from products where id = '"+id+"'")) {
+             ResultSet rs = statement.executeQuery("select * from products where id = '" + id + "'")) {
 
             if (rs.next()) {
                 String name = rs.getString("name");
@@ -151,8 +155,8 @@ public class StockService implements StockDAO {
      * Counts final price for buying
      *
      * @param currancy currancy of product
-     * @param price price for product
-     * @param amount amount of product
+     * @param price    price for product
+     * @param amount   amount of product
      * @return integer value of sum
      */
     private int paymentFinalPrice(String currancy, int price, int amount) {

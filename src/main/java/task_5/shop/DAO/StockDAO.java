@@ -1,7 +1,9 @@
-package task_4.shop.DAO;
+package task_5.shop.DAO;
 
-import task_4.shop.model.BucketItem;
-import task_4.shop.model.Product;
+import task_5.shop.model.BucketItem;
+import task_5.shop.model.Product;
+import task_5.shop.model.User;
+
 import java.util.List;
 
 /**
@@ -11,6 +13,7 @@ import java.util.List;
  * @version 1.1
  */
 public interface StockDAO {
+
     /**
      * Gets list of products from database
      *
@@ -36,8 +39,9 @@ public interface StockDAO {
      * Adds product to bucket
      *
      * @param product item of products
+     * @param user input parameter of user
      */
-    void addToBucket(Product product);
+    void addToBucket(Product product, User user);
 
     /**
      * Gets product by id

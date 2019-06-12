@@ -1,14 +1,16 @@
-package task_4.shop.controller;
+package task_5.shop.controller;
 
-import task_4.shop.DAO.BucketDAO;
-import task_4.shop.DAO.StockDAO;
-import task_4.shop.model.Product;
-import task_4.shop.service.BucketService;
-import task_4.shop.service.StockService;
+import task_5.shop.DAO.BucketDAO;
+import task_5.shop.DAO.StockDAO;
+import task_5.shop.model.Product;
+import task_5.shop.model.User;
+import task_5.shop.service.BucketService;
+import task_5.shop.service.StockService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -125,7 +127,10 @@ public class ProductOperationServlet extends HttpServlet {
      */
     private void listBucket(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.setAttribute("bucketList", bucketDAO.getBucketList());
+
+        HttpSession userSession = req.getSession();
+        User user = (User) userSession.getAttribute("user");
+        req.setAttribute("bucketList", bucketDAO.getBucketList(user));
         req.getRequestDispatcher("/WEB-INF/pages/bucketList.jsp").forward(req, resp);
     }
 
@@ -140,8 +145,11 @@ public class ProductOperationServlet extends HttpServlet {
     private void addToBucket(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
+        HttpSession userSession = req.getSession();
+        User user = (User) userSession.getAttribute("user");
+
         Product product = new Product(id);
-        stockDAO.addToBucket(product);
+        stockDAO.addToBucket(product, user);
         resp.sendRedirect("list");
     }
 }

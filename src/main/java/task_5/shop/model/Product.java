@@ -1,4 +1,4 @@
-package task_4.shop.model;
+package task_5.shop.model;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -6,24 +6,37 @@ package task_4.shop.model;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class BucketItem {
+public class Product {
     private String name;
     private String currancy;
     private int id;
     private int price;
     private int amount;
-    private int sum;
 
-    public BucketItem(String name, String currancy, int price, int amount, int sum) {
+    public Product() {
+    }
+
+    public Product(int id) {
+        this.id = id;
+    }
+
+    public Product(String name, String currancy, int price, int amount) {
         this.name = name;
         this.currancy = currancy;
         this.price = price;
         this.amount = amount;
-        this.sum = sum;
     }
 
-    public BucketItem(int id, String name, String currancy, int price, int amount, int sum) {
-        this(name, currancy, price, amount, sum);
+    public Product(int id, String name, String currancy, int price, int amount) {
+        this(name, currancy, price, amount);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,14 +56,6 @@ public class BucketItem {
         this.currancy = currancy;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -65,13 +70,5 @@ public class BucketItem {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
     }
 }

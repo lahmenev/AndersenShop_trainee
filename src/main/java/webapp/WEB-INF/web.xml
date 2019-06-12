@@ -6,7 +6,12 @@
 
     <servlet>
         <servlet-name>productOperationServlet</servlet-name>
-        <servlet-class>task_4.shop.controller.ProductOperationServlet</servlet-class>
+        <servlet-class>task_5.shop.controller.ProductOperationServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>task_5.shop.controller.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -39,4 +44,28 @@
         <url-pattern>/addBucket</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/signOut</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -1,8 +1,9 @@
-package task_4.shop.service;
+package task_5.shop.service;
 
-import task_4.shop.DAO.BucketDAO;
-import task_4.shop.model.BucketItem;
-import task_4.shop.utils.DBUtils;
+import task_5.shop.DAO.BucketDAO;
+import task_5.shop.model.BucketItem;
+import task_5.shop.model.User;
+import task_5.shop.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,15 +22,17 @@ public class BucketService implements BucketDAO {
     /**
      * Gets list of bucket from database
      *
-     * @return List of Bucket
+     * @param user input parameter of user
+     * @return List of BucketItem objects
      */
     @Override
-    public List<BucketItem> getBucketList() {
+    public List<BucketItem> getBucketList(User user) {
+        String userName = user.getName();
         List<BucketItem> bucketList = new ArrayList<>();
 
         try (Connection connection = DBUtils.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("select * from orders")) {
+             ResultSet rs = statement.executeQuery("select * from orders where userName = '"+userName+"'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
