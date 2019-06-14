@@ -1,6 +1,7 @@
 package task_3.shop.model;
 
 import task_3.shop.model.strategies.CurrencyStrategy;
+import task_3.shop.model.strategies.PaymentByDefault;
 import task_3.shop.model.strategies.PaymentByRub;
 import task_3.shop.model.strategies.PaymentByUsd;
 import task_3.shop.service.DBConnection;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -132,16 +134,33 @@ public class Bucket implements Serializable {
      * @return
      */
     public int paymentFinalPrice(String currency, int price, int amount) {
-
         PaymentByRub rubPayment = new PaymentByRub();
         PaymentByUsd usdPayment = new PaymentByUsd();
 
+        rubMap.put("RUB", rubPayment);
+        usdMap.put("USD", usdPayment);
+
         if (currency.equals("RUB")) {
-            strategy = new PaymentByRub();
+            strategy = rubMap.getOrDefault("RUB", new PaymentByDefault());
         } else if (currency.equals("USD")) {
-            strategy = new PaymentByUsd();
+            strategy = rubMap.getOrDefault("USD", new PaymentByDefault());
         }
 
         return strategy.payment(price, amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bucket bucket = (Bucket) o;
+        return strategy.equals(bucket.strategy) &&
+                rubMap.equals(bucket.rubMap) &&
+                usdMap.equals(bucket.usdMap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strategy, rubMap, usdMap);
     }
 }

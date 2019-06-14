@@ -6,10 +6,10 @@ package task_3.shop.model.strategies;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByRub implements CurrencyStrategy {
+public class PaymentByDefault implements CurrencyStrategy {
 
     /**
-     * Counts price for products
+     * Counts price for products by default
      *
      * @param price argument of price
      * @param amount argument of product's amount
