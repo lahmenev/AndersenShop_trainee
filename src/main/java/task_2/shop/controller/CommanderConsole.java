@@ -19,19 +19,12 @@ import java.lang.reflect.Proxy;
 public class CommanderConsole {
     private Stock stock = new Stock();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private Customer customer = new Customer("Sergey", 5000);
+    private User user = new User("Sergey", 5000);
     private PaymentByRub rub = new PaymentByRub();
     private PaymentByUsd usd = new PaymentByUsd();
     private Serialization serialization = new Serialization();
 
-    private Command displayProductsCommand = new DisplayProductsCommand(stock);
-    private Command displayBucketCommand = new DisplayBucketCommand(customer);
-    private Command addToBucketCommand = new AddToBucketCommand(stock, customer);
-    private Command delFromBucketCommand = new DelFromBucketCommand(customer);
-    private Command clearBucketCommand = new ClearBucketCommand(customer);
-
-    private InvokerCommands invokerCommands = new InvokerCommands(displayProductsCommand, displayBucketCommand, addToBucketCommand,
-            delFromBucketCommand, clearBucketCommand);
+    private InvokerCommand invokerCommandImpl = new InvokerCommandImpl(user, stock);
 
     public CommanderConsole() {
         ClassLoader classLoader = stock.getClass().getClassLoader();
@@ -44,7 +37,7 @@ public class CommanderConsole {
         proxyInstance.createProduct(new FoodProduct("Water", rub.getRub(), 30, 200));
         proxyInstance.createProduct(new NonFoodProduct("laptop", usd.getUsd(), 1000, 20));
 
-        customer.setBucket(serialization.deSerialize());
+        user.setBucket(serialization.deSerialize());
 
         System.out.println("You are welcome to the shop! Below you can see list of commands.");
         showListCommand();
@@ -82,7 +75,7 @@ public class CommanderConsole {
 
             switch (action) {
                 case "1":
-                    invokerCommands.displayProducts();
+                    invokerCommandImpl.displayProducts();
                     break;
                 case "2":
                     addToBucketEventHandler();
@@ -94,7 +87,7 @@ public class CommanderConsole {
                     delProductEventHandler();
                     break;
                 case "5":
-                    invokerCommands.clearBucket();
+                    invokerCommandImpl.clearBucket();
                     break;
                     default:
                         exitEventHandler(action);
@@ -114,7 +107,7 @@ public class CommanderConsole {
             System.out.println("Wrong command. Try again!");
         }
 
-        serialization.serialize(customer.getBucket());
+        serialization.serialize(user.getBucket());
     }
 
     /**
@@ -132,7 +125,7 @@ public class CommanderConsole {
         if (stock.getStock().get(id) == null) {
             System.out.println("There is no such product is the stock. Re-enter id");
             id = Integer.parseInt(reader.readLine());
-            customer.setIdOfProductForBucket(id);
+            user.setIdOfProductForBucket(id);
         }
 
         System.out.println("Enter amount of product");
@@ -141,12 +134,12 @@ public class CommanderConsole {
         if (amount > stock.getStock().get(id).getAmount()) {
             System.out.println("There is no such amount of product in the stock. Re-enter amount");
             amount = Integer.parseInt(reader.readLine());
-            customer.setAmountofProductForBucket(amount);
+            user.setAmountofProductForBucket(amount);
         }
 
-        customer.setIdOfProductForBucket(id);
-        customer.setAmountofProductForBucket(amount);
-        invokerCommands.addToBucket();
+        user.setIdOfProductForBucket(id);
+        user.setAmountofProductForBucket(amount);
+        invokerCommandImpl.addToBucket();
     }
 
     /**
@@ -158,7 +151,7 @@ public class CommanderConsole {
         Product productInBucket;
         String action;
         int id;
-        invokerCommands.displayBucket();
+        invokerCommandImpl.displayBucket();
 
         System.out.println("Do you want to buy product? Y/N");
         action = reader.readLine();
@@ -166,18 +159,18 @@ public class CommanderConsole {
         if (action.equalsIgnoreCase("Y")) {
             System.out.println("Enter id of selected product");
             id = Integer.parseInt(reader.readLine());
-            customer.setIdOfProductForBucket(id);
+            user.setIdOfProductForBucket(id);
 
-            if (customer.getBucket().getProductById(id) == null) {
+            if (user.getBucket().getProductById(id) == null) {
                 System.out.println("There is no such product is the bucket. Re-enter id");
                 id = Integer.parseInt(reader.readLine());
-                customer.setIdOfProductForBucket(id);
+                user.setIdOfProductForBucket(id);
             }
 
-            productInBucket = customer.getBucket().getProductById(id);
-            int finalprice = customer.getBucket().paymentFinalPrice(productInBucket);
+            productInBucket = user.getBucket().getProductById(id);
+            int finalprice = user.getBucket().paymentFinalPrice(productInBucket);
             System.out.println("Final price for you: " + finalprice);
-            invokerCommands.delFromBucket();
+            invokerCommandImpl.delFromBucket();
         }
     }
 
@@ -191,7 +184,7 @@ public class CommanderConsole {
 
         System.out.println("Enter id of product, needs to remove from bucket");
         id = Integer.parseInt(reader.readLine());
-        customer.setIdOfProductForBucket(id);
-        invokerCommands.delFromBucket();
+        user.setIdOfProductForBucket(id);
+        invokerCommandImpl.delFromBucket();
     }
 }
