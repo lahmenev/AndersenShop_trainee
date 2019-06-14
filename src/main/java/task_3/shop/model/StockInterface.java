@@ -32,7 +32,7 @@ public interface StockInterface {
      * Gets currency of product by id
      *
      * @param id identify of product
-     * @return currancy string
+     * @return currency string
      */
     String getCurrencyNameById(int id);
 

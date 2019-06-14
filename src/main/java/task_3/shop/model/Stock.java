@@ -21,13 +21,13 @@ public class Stock implements StockInterface {
      */
     public void createProduct(Product product) {
         String name = product.getName();
-        String currancy = product.getCurrency();
+        String currency = product.getCurrency();
         int price = product.getPrice();
         int amount = product.getAmount();
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement("insert into products " +
-                     "(name, currancy, price, amount) value ('"+name+"', '"+currancy+"', '"+price+"', '"+amount+"')")) {
+                     "(name, currency, price, amount) value ('"+name+"', '"+currency+"', '"+price+"', '"+amount+"')")) {
 
             statement.executeUpdate();
 
@@ -52,7 +52,7 @@ public class Stock implements StockInterface {
             while (rs.next()) {
                 product.setId(rs.getInt("id"));
                 product.setName(rs.getString("name"));
-                product.setCurrency(rs.getString("currancy"));
+                product.setCurrency(rs.getString("currency"));
                 product.setPrice(rs.getInt("price"));
                 product.setAmount(rs.getInt("amount"));
             }
@@ -99,17 +99,17 @@ public class Stock implements StockInterface {
      * @return currancy string
      */
     public String getCurrencyNameById(int id) {
-        String currancy = null;
+        String currency = null;
 
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("select currancy from products where id = '\"+id+\"'")) {
-            currancy = rs.getString("currancy");
+             ResultSet rs = statement.executeQuery("select currancy from products where id = '"+id+"'")) {
+            currency = rs.getString("currency");
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return currancy;
+        return currency;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Stock implements StockInterface {
 
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery("select price from products where id = '\"+id+\"'")) {
+             ResultSet rs = statement.executeQuery("select price from products where id = '"+id+"'")) {
             price = rs.getInt("price");
         } catch (SQLException e) {
             e.printStackTrace();

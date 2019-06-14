@@ -1,6 +1,6 @@
 package task_3.shop.commands;
 
-import task_3.shop.model.Customer;
+import task_3.shop.model.User;
 import task_3.shop.model.Product;
 import task_3.shop.model.Stock;
 
@@ -12,10 +12,10 @@ import task_3.shop.model.Stock;
  */
 public class AddToBucketCommand implements Command {
     private Stock stock;
-    private Customer customer;
+    private User user;
 
-    public AddToBucketCommand(Stock stock, Customer customer) {
-        this.customer = customer;
+    public AddToBucketCommand(Stock stock, User user) {
+        this.user = user;
         this.stock = stock;
     }
 
@@ -24,12 +24,12 @@ public class AddToBucketCommand implements Command {
      */
     @Override
     public void execute() {
-        int id = customer.getIdOfProductForBucket();
-        int amountInBucket = customer.getAmountOfProductForBucket();
+        int id = user.getIdOfProductForBucket();
+        int amountInBucket = user.getAmountOfProductForBucket();
         Product stockProduct = stock.getStock().get(id - 1);
         int amountInStock = stockProduct.getAmount();
 
-        customer.getBucket().addToBucket(id, customer, new Product(stockProduct.getName(),
+        user.getBucket().addToBucket(id, user, new Product(stockProduct.getName(),
                 stockProduct.getCurrency(), stockProduct.getPrice(), amountInBucket));
         stockProduct.setAmount(amountInStock - amountInBucket);
     }

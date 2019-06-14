@@ -17,17 +17,8 @@ import java.lang.reflect.Proxy;
 public class CommanderConsole {
     private Stock stock = new Stock();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private Customer customer = new Customer("Sergey", 5000);
-
-    private Command displayProductsCommand = new DisplayProductsCommand(stock);
-    private Command displayBucketCommand = new DisplayBucketCommand(customer);
-    private Command addToBucketCommand = new AddToBucketCommand(stock, customer);
-    private Command delFromBucketCommand = new DelFromBucketCommand(customer);
-    private Command clearBucketCommand = new ClearBucketCommand(customer);
-    private Command showUserInfo = new ShowUserInfo(customer);
-
-    private InvokerCommands invokerCommands = new InvokerCommands(displayProductsCommand, displayBucketCommand, addToBucketCommand,
-            delFromBucketCommand, clearBucketCommand, showUserInfo);
+    private User user = new User("Sergey", 5000);
+    private InvokerCommand invokerCommandImpl = new InvokerCommandImpl(user, stock);
 
     public CommanderConsole() {
         ClassLoader classLoader = stock.getClass().getClassLoader();
@@ -79,33 +70,22 @@ public class CommanderConsole {
 
             switch (action) {
                 case "1":
-                    invokerCommands.displayProducts();
+                    invokerCommandImpl.displayProducts();
                     break;
                 case "2":
-                    System.out.println("Enter id of product for adding to bucket");
-                    id = Integer.parseInt(reader.readLine());
-
-                    System.out.println("Enter amount of product");
-                    amount = Integer.parseInt(reader.readLine());
-
-                    customer.setIdOfProductForBucket(id);
-                    customer.setAmountOfProductForBucket(amount);
-                    invokerCommands.addToBucket();
+                    addToBucketEventHandler();
                     break;
                 case "3":
-                    invokerCommands.displayBucket();
+                    invokerCommandImpl.displayBucket();
                     break;
                 case "4":
-                    System.out.println("Enter id of product, needs to remove from bucket");
-                    id = Integer.parseInt(reader.readLine());
-                    customer.setIdOfProductForBucket(id);
-                    invokerCommands.delFromBucket();
+                    delProductEventHandler();
                     break;
                 case "5":
-                    invokerCommands.clearBucket();
+                    invokerCommandImpl.clearBucket();
                     break;
                 case "6":
-                    invokerCommands.showUserInfo();
+                    invokerCommandImpl.showUserInfo();
                     break;
                 default:
 
@@ -114,8 +94,40 @@ public class CommanderConsole {
                     }
 
                     break;
-
             }
         }
+    }
+
+    /**
+     * Handler for adding product into bucket
+     *
+     * @throws IOException
+     */
+    private void addToBucketEventHandler() throws IOException {
+        int id;
+        int amount;
+
+        System.out.println("Enter id of product for adding to bucket");
+        id = Integer.parseInt(reader.readLine());
+
+        System.out.println("Enter amount of product");
+        amount = Integer.parseInt(reader.readLine());
+
+        user.setIdOfProductForBucket(id);
+        user.setAmountOfProductForBucket(amount);
+        invokerCommandImpl.addToBucket();
+    }
+
+    /**
+     * Handler for removing product from bucket
+     *
+     * @throws IOException
+     */
+    private void delProductEventHandler() throws IOException {
+        int id;
+        System.out.println("Enter id of product, needs to remove from bucket");
+        id = Integer.parseInt(reader.readLine());
+        user.setIdOfProductForBucket(id);
+        invokerCommandImpl.delFromBucket();
     }
 }

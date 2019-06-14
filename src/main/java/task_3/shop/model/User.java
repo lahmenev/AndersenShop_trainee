@@ -6,7 +6,7 @@ package task_3.shop.model;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class Customer {
+public class User {
     private int id;
     private String name;
     private int money;
@@ -16,7 +16,7 @@ public class Customer {
     private int idOfProductForBucket;
     private int amountOfProductForBucket;
 
-    public Customer(String name, int money) {
+    public User(String name, int money) {
         this.name = name;
         this.money = money;
         this.bucket = new Bucket();

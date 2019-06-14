@@ -6,7 +6,7 @@ package task_3.shop.model.strategies;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByUsd implements CurrancyStrategy {
+public class PaymentByUsd implements CurrencyStrategy {
 
     /**
      * Counts price for products

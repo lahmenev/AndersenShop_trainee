@@ -13,17 +13,17 @@ public class UserInfo {
 
     private static Date date;
     private static int order_id;
-    private static int summOrder;
+    private static int sumOrder;
 
     /**
      * Gets user information
      *
-     * @param customer input parameter of user
+     * @param user input parameter of user
      */
-    public void getUserInformation(Customer customer) {
+    public void getUserInformation(User user) {
         Bucket bucket = new Bucket();
         String currancy;
-        int user_id = customer.getId();
+        int user_id = user.getId();
         int price;
         int amount;
         int finalPrice = 0;
@@ -36,13 +36,13 @@ public class UserInfo {
             while (rs.next()) {
                 order_id = rs.getInt("id");
                 date = rs.getDate("date");
-                summOrder = rs.getInt("summ");
+                sumOrder = rs.getInt("summ");
 
                 price = rs.getInt("price");
                 amount = rs.getInt("amount");
-                currancy = rs.getString("currancy");
+                currancy = rs.getString("currency");
                 finalPrice += bucket.paymentFinalPrice(currancy, price, amount);
-                System.out.printf("order_id = %d , date = %tF, sum of order = %d\n",order_id, date, summOrder);
+                System.out.printf("order_id = %d , date = %tF, sum of order = %d\n",order_id, date, sumOrder);
             }
 
             System.out.printf("Final price for all orders: %d\n", finalPrice);
@@ -59,7 +59,7 @@ public class UserInfo {
         return order_id;
     }
 
-    public static int getSummOrder() {
-        return summOrder;
+    public static int getSumOrder() {
+        return sumOrder;
     }
 }

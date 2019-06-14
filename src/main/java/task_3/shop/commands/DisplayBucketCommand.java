@@ -1,6 +1,6 @@
 package task_3.shop.commands;
 
-import task_3.shop.model.Customer;
+import task_3.shop.model.User;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,10 +9,10 @@ import task_3.shop.model.Customer;
  * @version 1.1
  */
 public class DisplayBucketCommand implements Command {
-    private Customer customer;
+    private User user;
 
-    public DisplayBucketCommand(Customer customer) {
-        this.customer = customer;
+    public DisplayBucketCommand(User user) {
+        this.user = user;
     }
 
     /**
@@ -20,6 +20,6 @@ public class DisplayBucketCommand implements Command {
      */
     @Override
     public void execute() {
-        customer.getBucket().displayBucket(customer);
+        user.getBucket().displayBucket(user);
     }
 }

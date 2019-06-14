@@ -1,12 +1,15 @@
 package task_3.shop.commands;
 
+import task_3.shop.model.Stock;
+import task_3.shop.model.User;
+
 /**
  * email : s.lakhmenev@andersenlab.com
  *
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class InvokerCommands {
+public class InvokerCommandImpl implements InvokerCommand {
     private Command displayProductsCommand;
     private Command displayBucketCommand;
     private Command addToBucketCommand;
@@ -14,19 +17,19 @@ public class InvokerCommands {
     private Command clearBucketCommand;
     private Command showUserInfo;
 
-    public InvokerCommands(Command displayProductsCommand, Command displayBucketCommand, Command addToBucketCommand,
-                           Command delFromBucketCommand, Command clearBucketCommand, Command showUserInfo) {
-        this.displayProductsCommand = displayProductsCommand;
-        this.displayBucketCommand = displayBucketCommand;
-        this.addToBucketCommand = addToBucketCommand;
-        this.delFromBucketCommand = delFromBucketCommand;
-        this.clearBucketCommand = clearBucketCommand;
-        this.showUserInfo = showUserInfo;
+    public InvokerCommandImpl(User user, Stock stock) {
+        this.displayProductsCommand = new DisplayProductsCommand(stock);
+        this.displayBucketCommand = new DisplayBucketCommand(user);
+        this.addToBucketCommand = new AddToBucketCommand(stock, user);
+        this.delFromBucketCommand = new DelFromBucketCommand(user);
+        this.clearBucketCommand = new ClearBucketCommand(user);
+        this.showUserInfo = new ShowUserInfoCommand(user);
     }
 
     /**
      * Displays products in Stock
      */
+    @Override
     public void displayProducts() {
         displayProductsCommand.execute();
     }
@@ -34,6 +37,7 @@ public class InvokerCommands {
     /**
      * Displays products in bucket
      */
+    @Override
     public void displayBucket() {
         displayBucketCommand.execute();
     }
@@ -41,6 +45,7 @@ public class InvokerCommands {
     /**
      * Adds product into bucket
      */
+    @Override
     public void addToBucket() {
         addToBucketCommand.execute();
     }
@@ -48,6 +53,7 @@ public class InvokerCommands {
     /**
      * Removes product from bucket
      */
+    @Override
     public void delFromBucket() {
         delFromBucketCommand.execute();
     }
@@ -55,10 +61,15 @@ public class InvokerCommands {
     /**
      * Clears bucket
      */
+    @Override
     public void clearBucket() {
         clearBucketCommand.execute();
     }
 
+    /**
+     * Displays user information
+     */
+    @Override
     public void showUserInfo() {
         showUserInfo.execute();
     }

@@ -1,11 +1,13 @@
 package task_3.shop.model;
 
-import task_3.shop.model.strategies.CurrancyStrategy;
+import task_3.shop.model.strategies.CurrencyStrategy;
 import task_3.shop.model.strategies.PaymentByRub;
 import task_3.shop.model.strategies.PaymentByUsd;
 import task_3.shop.service.DBConnection;
 import java.io.Serializable;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -14,21 +16,23 @@ import java.sql.*;
  * @version 1.1
  */
 public class Bucket implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private CurrancyStrategy strategy;
+    private static final long serialVersionUID = 8578614558107783054L;
+    private CurrencyStrategy strategy;
+    private Map<String, CurrencyStrategy> rubMap = new HashMap<>();
+    private Map<String, CurrencyStrategy> usdMap = new HashMap<>();
 
     /**
      * Displays bucket
      *
-     * @param customer input parameter of user
+     * @param user input parameter of user
      */
-    public void displayBucket(Customer customer) {
-        int id;
+    public void displayBucket(User user) {
         String name;
-        String currancy;
+        String currency;
+        int id;
         int price;
         int amount;
-        int user_id = customer.getId();
+        int user_id = user.getId();
         int finalPrice = 0;
 
         try (Connection connection = DBConnection.getConnection();
@@ -40,41 +44,49 @@ public class Bucket implements Serializable {
                 name = rs.getString("name");
                 price = rs.getInt("price");
                 amount = rs.getInt("amount");
-                currancy = rs.getString("currancy");
+                currency = rs.getString("currency");
 
-                finalPrice += paymentFinalPrice(currancy, price, amount);
+                finalPrice += paymentFinalPrice(currency, price, amount);
                 System.out.printf("id = %d, name = %s, amount = %d\n", id, name, amount);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Final prcie = " + finalPrice);
+        System.out.println("Final price = " + finalPrice);
     }
 
     /**
      * Adds product into bucket
      *
      * @param id of product
-     * @param customer input parameter of user
+     * @param user input parameter of user
      * @param product input product item
      */
-    public void addToBucket(int id, Customer customer, Product product) {
+    public void addToBucket(int id, User user, Product product) {
+        PreparedStatement statement = null;
         String name = product.getName();
-        String currancy = product.getCurrency();
+        String currency = product.getCurrency();
         int price = product.getPrice();
         int amount = product.getAmount();
-        int user_id = customer.getId();
-        int summ = paymentFinalPrice(currancy, price, amount);
+        int user_id = user.getId();
+        int sum = paymentFinalPrice(currency, price, amount);
 
-        try (Connection connection = DBConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement("insert into orders" +
-                     "(name, currancy, price, amount, user_id, summ) values " +
-                     "('"+name+"', '"+currancy+"', '"+price+"', '"+amount+"', '"+user_id+"', '"+summ+"')")) {
+        try (Connection connection = DBConnection.getConnection()) {
+            statement = connection.prepareStatement("insert into orders" +
+                    "(name, currency, price, amount, user_id, summ) values " +
+                    "('"+name+"', '"+currency+"', '"+price+"', '"+amount+"', '"+user_id+"', '"+sum+"')");
 
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -97,10 +109,10 @@ public class Bucket implements Serializable {
     /**
      * Clears bucket
      *
-     * @param customer input parameter of user
+     * @param user input parameter of user
      */
-    public void clearBucket(Customer customer) {
-        int id = customer.getId();
+    public void clearBucket(User user) {
+        int id = user.getId();
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement()) {
 
@@ -114,16 +126,19 @@ public class Bucket implements Serializable {
     /**
      * Counts final price for buying
      *
-     * @param currancy currancy of product
+     * @param currency currency of product
      * @param price price for product
      * @param amount amount of product
      * @return
      */
-    public int paymentFinalPrice(String currancy, int price, int amount) {
+    public int paymentFinalPrice(String currency, int price, int amount) {
 
-        if (currancy.equals("RUB")) {
+        PaymentByRub rubPayment = new PaymentByRub();
+        PaymentByUsd usdPayment = new PaymentByUsd();
+
+        if (currency.equals("RUB")) {
             strategy = new PaymentByRub();
-        } else if (currancy.equals("USD")) {
+        } else if (currency.equals("USD")) {
             strategy = new PaymentByUsd();
         }
 

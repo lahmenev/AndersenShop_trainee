@@ -6,7 +6,7 @@ package task_3.shop.model.strategies;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public interface CurrancyStrategy {
+public interface CurrencyStrategy {
 
     /**
      * Counts price for products

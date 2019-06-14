@@ -1,6 +1,6 @@
 package task_3.shop.commands;
 
-import task_3.shop.model.Customer;
+import task_3.shop.model.User;
 import task_3.shop.model.UserInfo;
 
 /**
@@ -9,12 +9,12 @@ import task_3.shop.model.UserInfo;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class ShowUserInfo implements Command{
-    private Customer customer;
+public class ShowUserInfoCommand implements Command{
+    private User user;
     private UserInfo userInfo = new UserInfo();
 
-    public ShowUserInfo(Customer customer) {
-        this.customer = customer;
+    public ShowUserInfoCommand(User user) {
+        this.user = user;
     }
 
     /**
@@ -22,6 +22,6 @@ public class ShowUserInfo implements Command{
      */
     @Override
     public void execute() {
-        userInfo.getUserInformation(customer);
+        userInfo.getUserInformation(user);
     }
 }
