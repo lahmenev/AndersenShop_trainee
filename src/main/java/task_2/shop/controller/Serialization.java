@@ -18,24 +18,30 @@ public class Serialization {
      * Makes serialization
      *
      * @param bucket object of Bucket
-     * @throws IOException
      */
-    public void serialize(Bucket bucket) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("temp.out"));
-        out.writeObject(bucket);
-        out.flush();
-        out.close();
+    public void serialize(Bucket bucket) {
+
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("temp.out"))) {
+            out.writeObject(bucket);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Makes deserialization.
      *
      * @return object Bucket
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public Bucket deSerialize() throws IOException, ClassNotFoundException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream("temp.out"));
-        return (Bucket) in.readObject();
+    public Bucket deSerialize() {
+        Bucket bucket = null;
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("temp.out"))) {
+            bucket = (Bucket) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return bucket;
     }
 }

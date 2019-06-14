@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.1
  */
 public class Currency implements Serializable {
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = -5548857951646011130L;
     private String currencyName;
     private int currencyGain;
     private String currencyCode;

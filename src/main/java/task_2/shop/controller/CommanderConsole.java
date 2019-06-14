@@ -44,11 +44,7 @@ public class CommanderConsole {
         proxyInstance.createProduct(new FoodProduct("Water", rub.getRub(), 30, 200));
         proxyInstance.createProduct(new NonFoodProduct("laptop", usd.getUsd(), 1000, 20));
 
-        try {
-            customer.setBucket(serialization.deSerialize());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        customer.setBucket(serialization.deSerialize());
 
         System.out.println("You are welcome to the shop! Below you can see list of commands.");
         showListCommand();
@@ -78,10 +74,7 @@ public class CommanderConsole {
      * @throws IOException if there is problem with I/O
      */
     private void command() throws IOException {
-        Product productInBucket;
         String action = "";
-        int id;
-        int amount;
 
         while (!action.equalsIgnoreCase("finish")) {
             System.out.println("Please, choose action");
@@ -92,70 +85,113 @@ public class CommanderConsole {
                     invokerCommands.displayProducts();
                     break;
                 case "2":
-                    System.out.println("Enter id of product for adding to bucket");
-                    id = Integer.parseInt(reader.readLine());
-
-                    if (stock.getStock().get(id) == null) {
-                        System.out.println("There is no such product is the stock. Re-enter id");
-                        id = Integer.parseInt(reader.readLine());
-                        customer.setIdOfProductForBucket(id);
-                    }
-
-                    System.out.println("Enter amount of product");
-                    amount = Integer.parseInt(reader.readLine());
-
-                    if (amount > stock.getStock().get(id).getAmount()) {
-                        System.out.println("There is no such amount of product in the stock. Re-enter amount");
-                        amount = Integer.parseInt(reader.readLine());
-                        customer.setAmountofProductForBucket(amount);
-                    }
-
-                    customer.setIdOfProductForBucket(id);
-                    customer.setAmountofProductForBucket(amount);
-                    invokerCommands.addToBucket();
+                    addToBucketEventHandler();
                     break;
                 case "3":
-                    invokerCommands.displayBucket();
-
-                    System.out.println("Do you want to buy product? Y/N");
-                    action = reader.readLine();
-
-                    if (action.equalsIgnoreCase("Y")) {
-                        System.out.println("Enter id of selected product");
-                        id = Integer.parseInt(reader.readLine());
-                        customer.setIdOfProductForBucket(id);
-
-                        if (customer.getBucket().getProductById(id) == null) {
-                            System.out.println("There is no such product is the bucket. Re-enter id");
-                            id = Integer.parseInt(reader.readLine());
-                            customer.setIdOfProductForBucket(id);
-                        }
-
-                        productInBucket = customer.getBucket().getProductById(id);
-                        int finalprice = customer.getBucket().paymentFinalPrice(productInBucket);
-                        System.out.println("Final price for you: " + finalprice);
-                        invokerCommands.delFromBucket();
-                    }
-
+                    displayBucketEventHandler();
                     break;
                 case "4":
-                    System.out.println("Enter id of product, needs to remove from bucket");
-                    id = Integer.parseInt(reader.readLine());
-                    customer.setIdOfProductForBucket(id);
-                    invokerCommands.delFromBucket();
+                    delProductEventHandler();
                     break;
                 case "5":
                     invokerCommands.clearBucket();
                     break;
                     default:
-
-                        if (!action.equalsIgnoreCase("finish")) {
-                            System.out.println("Wrong command. Try again!");
-                        }
-
-                        serialization.serialize(customer.getBucket());
+                        exitEventHandler(action);
                         break;
             }
         }
+    }
+
+    /**
+     * Handler for exiting from application
+     *
+     * @param action input parameter of event
+     */
+    private void exitEventHandler(String action) {
+
+        if (!action.equalsIgnoreCase("finish")) {
+            System.out.println("Wrong command. Try again!");
+        }
+
+        serialization.serialize(customer.getBucket());
+    }
+
+    /**
+     * Handler for adding product into bucket
+     *
+     * @throws IOException
+     */
+    private void addToBucketEventHandler() throws IOException {
+        int id;
+        int amount;
+
+        System.out.println("Enter id of product for adding to bucket");
+        id = Integer.parseInt(reader.readLine());
+
+        if (stock.getStock().get(id) == null) {
+            System.out.println("There is no such product is the stock. Re-enter id");
+            id = Integer.parseInt(reader.readLine());
+            customer.setIdOfProductForBucket(id);
+        }
+
+        System.out.println("Enter amount of product");
+        amount = Integer.parseInt(reader.readLine());
+
+        if (amount > stock.getStock().get(id).getAmount()) {
+            System.out.println("There is no such amount of product in the stock. Re-enter amount");
+            amount = Integer.parseInt(reader.readLine());
+            customer.setAmountofProductForBucket(amount);
+        }
+
+        customer.setIdOfProductForBucket(id);
+        customer.setAmountofProductForBucket(amount);
+        invokerCommands.addToBucket();
+    }
+
+    /**
+     * Handler for display list of bucket
+     *
+     * @throws IOException
+     */
+    private void displayBucketEventHandler() throws IOException {
+        Product productInBucket;
+        String action;
+        int id;
+        invokerCommands.displayBucket();
+
+        System.out.println("Do you want to buy product? Y/N");
+        action = reader.readLine();
+
+        if (action.equalsIgnoreCase("Y")) {
+            System.out.println("Enter id of selected product");
+            id = Integer.parseInt(reader.readLine());
+            customer.setIdOfProductForBucket(id);
+
+            if (customer.getBucket().getProductById(id) == null) {
+                System.out.println("There is no such product is the bucket. Re-enter id");
+                id = Integer.parseInt(reader.readLine());
+                customer.setIdOfProductForBucket(id);
+            }
+
+            productInBucket = customer.getBucket().getProductById(id);
+            int finalprice = customer.getBucket().paymentFinalPrice(productInBucket);
+            System.out.println("Final price for you: " + finalprice);
+            invokerCommands.delFromBucket();
+        }
+    }
+
+    /**
+     * Handler for removing product from bucket
+     *
+     * @throws IOException
+     */
+    private void delProductEventHandler() throws IOException {
+        int id;
+
+        System.out.println("Enter id of product, needs to remove from bucket");
+        id = Integer.parseInt(reader.readLine());
+        customer.setIdOfProductForBucket(id);
+        invokerCommands.delFromBucket();
     }
 }

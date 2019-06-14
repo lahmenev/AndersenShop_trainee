@@ -8,7 +8,7 @@ import task_2.shop.model.Currency;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByUsd implements CurrancyStrategy {
+public class PaymentByUsd implements CurrencyStrategy {
     private Currency usd = new Currency("Dollar USA", 65, "USD");
 
     /**

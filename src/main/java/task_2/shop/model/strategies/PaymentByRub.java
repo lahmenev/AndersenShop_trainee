@@ -8,7 +8,7 @@ import task_2.shop.model.Currency;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByRub implements CurrancyStrategy {
+public class PaymentByRub implements CurrencyStrategy {
     private Currency rub = new Currency("Russian ruble", 1, "RUB");
 
     /**

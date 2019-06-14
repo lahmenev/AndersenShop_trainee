@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @version 1.1
  */
 public class Product implements Serializable {
+    private static final long serialVersionUID = 3578628990763436150L;
     private int id;
     private String name;
     private int price;
