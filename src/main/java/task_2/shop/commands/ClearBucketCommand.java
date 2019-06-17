@@ -1,6 +1,6 @@
-package shop.commands;
+package task_2.shop.commands;
 
-import shop.model.Bucket;
+import task_2.shop.model.User;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,10 +9,10 @@ import shop.model.Bucket;
  * @version 1.1
  */
 public class ClearBucketCommand implements Command {
-    private Bucket bucket;
+    private User user;
 
-    public ClearBucketCommand(Bucket bucket) {
-        this.bucket = bucket;
+    public ClearBucketCommand(User user) {
+        this.user = user;
     }
 
     /**
@@ -20,6 +20,6 @@ public class ClearBucketCommand implements Command {
      */
     @Override
     public void execute() {
-        bucket.clearBucket();
+        user.getBucket().clearBucket();
     }
 }

@@ -1,6 +1,6 @@
-package shop.commands;
+package task_2.shop.commands;
 
-import shop.model.Stock;
+import task_2.shop.model.Stock;
 
 /**
  * email : s.lakhmenev@andersenlab.com

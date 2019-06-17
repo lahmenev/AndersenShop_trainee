@@ -1,4 +1,4 @@
-package shop.commands;
+package task_2.shop.commands;
 
 /**
  * email : s.lakhmenev@andersenlab.com

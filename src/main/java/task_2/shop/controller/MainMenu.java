@@ -1,4 +1,4 @@
-package shop.controller;
+package task_2.shop.controller;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -8,7 +8,6 @@ package shop.controller;
  */
 public class MainMenu {
     public static void main(String[] args) {
-        CommanderConsole console = new CommanderConsole();
-        console.init();
+        new CommanderConsole();
     }
 }

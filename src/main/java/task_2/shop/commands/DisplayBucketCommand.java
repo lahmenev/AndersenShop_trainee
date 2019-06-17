@@ -1,6 +1,6 @@
-package shop.commands;
+package task_2.shop.commands;
 
-import shop.model.Bucket;
+import task_2.shop.model.User;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -9,10 +9,10 @@ import shop.model.Bucket;
  * @version 1.1
  */
 public class DisplayBucketCommand implements Command {
-    private Bucket bucket;
+    private User user;
 
-    public DisplayBucketCommand(Bucket bucket) {
-        this.bucket = bucket;
+    public DisplayBucketCommand(User user) {
+        this.user = user;
     }
 
     /**
@@ -20,6 +20,7 @@ public class DisplayBucketCommand implements Command {
      */
     @Override
     public void execute() {
-        bucket.displayBucket();
+        int id = user.getIdOfProductForBucket();
+        user.getBucket().displayBucket(id);
     }
 }

@@ -1,4 +1,6 @@
-package shop.model;
+package task_2.shop.model;
+
+import java.io.Serializable;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -6,19 +8,26 @@ package shop.model;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 3578628990763436150L;
     private int id;
     private String name;
     private int price;
     private int amount;
     private static int counter;
+    private Currency currency;
 
-    public Product(String name, int price, int amount) {
+    public Product(String name, Currency currency, int price, int amount) {
         this.name = name;
+        this.currency = currency;
         this.price = price;
         this.amount = amount;
         counter++;
         this.id = counter;
+    }
+
+    public void setActualAmountForBucket(int amount) {
+        this.amount += amount;
     }
 
     public String getName() {
@@ -53,12 +62,26 @@ public class Product {
         this.id = id;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public boolean productIsEmpty() {
+        return amount == 0;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "name = '" + name + '\'' +
+                "id = " + id +
+                ", name = '" + name + '\'' +
                 ", price = " + price +
                 ", amount = " + amount +
+                ", currency = " + currency.getCurrencyName() +
                 '}';
     }
 }
