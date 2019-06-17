@@ -9,11 +9,11 @@ package task_3.shop.model.strategies;
 public class PaymentByDefault implements CurrencyStrategy {
 
     /**
-     * Counts price for products by default
+     * Counts price for products by default case
      *
      * @param price argument of price
      * @param amount argument of product's amount
-     * @return final price for products in rubles
+     * @return value of final price
      */
     @Override
     public int payment(int price, int amount) {

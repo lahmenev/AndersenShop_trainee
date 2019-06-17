@@ -32,9 +32,4 @@ public interface InvokerCommand {
      * Clears bucket
      */
     void clearBucket();
-
-    /**
-     * Displays user information
-     */
-    void showUserInfo();
 }
