@@ -1,4 +1,4 @@
-package task_4.shop.model.strategies;
+package task_5.shop.model.strategies;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -6,17 +6,14 @@ package task_4.shop.model.strategies;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByUsd implements CurrencyStrategy {
+public interface CurrancyStrategy {
 
     /**
      * Counts price for products
      *
      * @param price argument of price
      * @param amount argument of product's amount
-     * @return
+     * @return value of final price
      */
-    @Override
-    public int payment(int price, int amount) {
-        return price * amount * 65;
-    }
+    int payment(int price, int amount);
 }

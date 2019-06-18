@@ -1,4 +1,4 @@
-package task_4.shop.model.strategies;
+package task_5.shop.model.strategies;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -6,7 +6,7 @@ package task_4.shop.model.strategies;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class PaymentByUsd implements CurrencyStrategy {
+public class PaymentByUsd implements CurrancyStrategy {
 
     /**
      * Counts price for products
