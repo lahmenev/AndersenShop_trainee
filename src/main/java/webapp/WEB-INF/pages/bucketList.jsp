@@ -9,7 +9,7 @@
 <center>
     <h1>Test Shop</h1>
     <h2>
-        <a href="/shop/list">List All Product</a>
+        <a href="/shop/productList">List All Product</a>
     </h2>
 </center>
 <div>
@@ -20,7 +20,7 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Currancy</th>
+            <th>Currency</th>
             <th>Price</th>
             <th>Amount</th>
             <th>Sum</th>
@@ -30,7 +30,7 @@
             <tr>
                 <td>${item.id}</td>
                 <td>${item.name}</td>
-                <td>${item.currancy}</td>
+                <td>${item.currency}</td>
                 <td>${item.price}</td>
                 <td>${item.amount}</td>
                 <td>${item.sum}</td>

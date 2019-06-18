@@ -7,17 +7,23 @@
 </head>
 <body>
 <center>
-    <h1>Test Shop</h1>
+    <h1>Add product to bucket</h1>
 </center>
 <div>
 
-    <form:form action="createProduct" modelAttribute="product" method="post">
+    <form:form action="add" modelAttribute="product" method="post">
         <table border="1" cellpadding="5">
-            <caption><h2>List of products</h2></caption>
+            <caption><h2>Adding product</h2></caption>
+            <tr>
+                <th>Id: </th>
+                <td>
+                    <form:input  path="id"/>
+                </td>
+            </tr>
             <tr>
                 <th>Name: </th>
                 <td>
-                    <form:input path="name"/>
+                    <form:input  path="name"/>
                 </td>
             </tr>
             <tr>
@@ -40,11 +46,15 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="Save" />
+                    <input type="submit" value="Add" />
                 </td>
             </tr>
         </table>
     </form:form>
+
+    <c:if test="${errorMessage != null}">
+        <div style="color:red;font-style:italic">${errorMessage}</div>
+    </c:if>
 </div>
 </body>
 </html>
