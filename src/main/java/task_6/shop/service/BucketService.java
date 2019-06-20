@@ -14,6 +14,12 @@ import java.util.List;
  */
 public class BucketService {
 
+    /**
+     * Gets list of bucket item
+     *
+     * @param user input parameter of user
+     * @return List of BucketItem objects
+     */
     public List<BucketItem> getBucketList(User user) {
         BucketDAO bucketDAO = new BucketDAOImpl();
         return bucketDAO.getAllItem(user);

@@ -1,15 +1,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="task_6.shop.model.User" %>
-<% User user = (User) session.getAttribute("user"); %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <center>
-    <h1><%=user.getName()%>, welcome to Test Shop</h1>
     <h2>
         <a href="/shop/createProduct">Add New Product</a>
         &nbsp;&nbsp;&nbsp;
