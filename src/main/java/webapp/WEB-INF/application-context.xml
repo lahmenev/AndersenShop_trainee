@@ -23,17 +23,21 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="bucketService" class="task_6.shop.service.BucketService">
+    <bean id="bucketDAO" class="task_6.shop.DAO.implement.BucketDAOImpl">
         <property name="template" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="stockService" class="task_6.shop.service.StockService">
+    <bean id="stockDAO" class="task_6.shop.DAO.implement.StockDAOImpl">
         <property name="template" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="userService" class="task_6.shop.service.UserService">
+    <bean id="userDAO" class="task_6.shop.DAO.implement.UserDAOImpl">
         <property name="template" ref="jdbcTemplate"/>
     </bean>
+
+    <bean id="bucketService" class="task_6.shop.service.BucketService"/>
+    <bean id="stockService" class="task_6.shop.service.StockService"/>
+    <bean id="userService" class="task_6.shop.service.UserService"/>
 
 
 

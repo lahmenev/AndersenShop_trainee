@@ -1,6 +1,9 @@
 package task_6.shop.DAO;
 
 import task_6.shop.model.User;
+
+import java.util.List;
+
 /**
  * email : s.lakhmenev@andersenlab.com
  *
@@ -10,17 +13,17 @@ import task_6.shop.model.User;
 public interface UserDAO {
 
     /**
-     * Adds user to database
+     * Insert item
      *
      * @param user input parameter of user
      */
-    void addUser(User user);
+    void addItem(User user);
 
     /**
-     * Check valid of user
+     * Gets list of item
      *
      * @param user input parameter of user
      * @return true if input User equals with user in database
      */
-    boolean isSignUpUser(User user);
+    List<User> getAllItem(User user);
 }

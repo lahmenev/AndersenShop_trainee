@@ -14,17 +14,13 @@ public class BucketItem {
     private int amount;
     private int sum;
 
-    public BucketItem(String name, String currency, int price, int amount, int sum) {
-        this.name = name;
-        this.currency = currency;
-        this.price = price;
-        this.amount = amount;
+    public BucketItem(Product product, int sum) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.currency = product.getCurrency();
+        this.price = product.getPrice();
+        this.amount = product.getAmount();
         this.sum = sum;
-    }
-
-    public BucketItem(int id, String name, String currency, int price, int amount, int sum) {
-        this(name, currency, price, amount, sum);
-        this.id = id;
     }
 
     public String getName() {

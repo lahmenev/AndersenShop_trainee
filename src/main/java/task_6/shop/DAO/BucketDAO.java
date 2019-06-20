@@ -13,10 +13,10 @@ import java.util.List;
 public interface BucketDAO {
 
     /**
-     * Gets list of bucket from database
+     * Gets list of item
      *
      * @param user input parameter of user
      * @return List of BucketItem objects
      */
-    List<BucketItem> getBucketList(User user);
+    List<BucketItem> getAllItem(User user);
 }

@@ -25,10 +25,10 @@ import javax.servlet.http.HttpSession;
 public class ProductOperationsController {
 
     @Autowired
-    BucketService bucketService;
+    StockService stockService;
 
     @Autowired
-    StockService stockService;
+    BucketService bucketService;
 
     /**
      * Shows products
@@ -38,7 +38,7 @@ public class ProductOperationsController {
      */
     @RequestMapping(value = "/productList", method = RequestMethod.GET)
     public String showProductList(Model model) {
-        model.addAttribute("productList", stockService.getAllProducts());
+        model.addAttribute("productList", stockService.getStockList());
         return "productList";
     }
 
