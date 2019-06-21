@@ -1,8 +1,7 @@
 package task_7.shop.service;
 
-import task_7.shop.DAO.BucketDAO;
-import task_7.shop.DAO.implement.BucketDAOImpl;
 import task_7.shop.model.BucketItem;
+
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
  * @author Lakhmenev Sergey
  * @version 1.1
  */
-public class BucketService {
+public interface BucketService {
 
     /**
      * Gets list of bucket item
@@ -19,8 +18,5 @@ public class BucketService {
      * @param userName input parameter of user
      * @return List of BucketItem objects
      */
-    public List<BucketItem> getBucketList(String userName) {
-        BucketDAO bucketDAO = new BucketDAOImpl();
-        return bucketDAO.getAllItem(userName);
-    }
+    List<BucketItem> getBucketList(String userName);
 }
