@@ -9,7 +9,7 @@
 <center>
     <h1>Test Shop</h1>
     <h2>
-        <a href="/shop/productList">List All Product</a>
+        <a href="/shop/products">List All Product</a>
     </h2>
 </center>
 <div>

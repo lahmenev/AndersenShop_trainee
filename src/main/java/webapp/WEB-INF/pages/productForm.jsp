@@ -11,7 +11,7 @@
 </center>
 <div>
 
-    <form:form action="createProduct" modelAttribute="product" method="post">
+    <form:form action="insert" modelAttribute="product" method="post">
         <table border="1" cellpadding="5">
             <caption><h2>List of products</h2></caption>
             <tr>

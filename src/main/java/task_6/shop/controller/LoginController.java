@@ -46,7 +46,7 @@ public class LoginController {
         String view = "loginForm";
 
         if (userService.isSignUpUser(user)) {
-            view = "redirect:/productList";
+            view = "redirect:/products";
         }
 
         return view;

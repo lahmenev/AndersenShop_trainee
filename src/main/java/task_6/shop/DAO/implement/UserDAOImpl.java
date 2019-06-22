@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void addItem(User user) {
-        String sqlQuery = "insert into users (name, password) values (?, ?))";
+        String sqlQuery = "insert into users1 (name, password) values (?, ?)";
         String name = user.getName();
         String password = user.getPassword();
 
@@ -44,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public List<User> getAllItem(User user) {
-        String sqlQuery = "select * from users where name = ? and password = ?";
+        String sqlQuery = "select * from users1 where name = ? and password = ?";
 
         RowMapper<User> userRowMapper = (rs, userItem) -> {
             User userMapper = new User();

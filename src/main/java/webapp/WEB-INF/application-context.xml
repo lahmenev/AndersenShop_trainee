@@ -35,11 +35,13 @@
         <property name="template" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="bucketService" class="task_6.shop.service.BucketService"/>
-    <bean id="stockService" class="task_6.shop.service.StockService"/>
-    <bean id="userService" class="task_6.shop.service.UserService"/>
-
-
-
-
+    <bean id="bucketService" class="task_6.shop.service.implement.BucketServiceImpl">
+        <property name="bucketDAO" ref="bucketDAO"/>
+    </bean>
+    <bean id="stockService" class="task_6.shop.service.implement.StockServiceImpl">
+        <property name="stockDAO" ref="stockDAO"/>
+    </bean>
+    <bean id="userService" class="task_6.shop.service.implement.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
 </beans>
