@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/onlineshop?useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+    <property name="username" value="root"/>
+    <property name="password" value="1q2w3e4r5t6y"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="bucketDAO" class="task_6.shop.DAO.implement.BucketDAOImpl">
+        <property name="template" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="stockDAO" class="task_6.shop.DAO.implement.StockDAOImpl">
+        <property name="template" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="userDAO" class="task_6.shop.DAO.implement.UserDAOImpl">
+        <property name="template" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="bucketService" class="task_6.shop.service.implement.BucketServiceImpl">
+        <property name="bucketDAO" ref="bucketDAO"/>
+    </bean>
+    <bean id="stockService" class="task_6.shop.service.implement.StockServiceImpl">
+        <property name="stockDAO" ref="stockDAO"/>
+    </bean>
+    <bean id="userService" class="task_6.shop.service.implement.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+</beans>
