@@ -1,6 +1,6 @@
 package task_3.shop.model;
 
-import task_3.shop.model.strategies.CurrancyStrategy;
+import task_3.shop.model.strategies.CurrencyStrategy;
 import task_3.shop.model.strategies.PaymentByRub;
 import task_3.shop.model.strategies.PaymentByUsd;
 import task_3.shop.service.DBConnection;
@@ -15,7 +15,7 @@ import java.sql.*;
  */
 public class Bucket implements Serializable {
     private static final long serialVersionUID = 1L;
-    private CurrancyStrategy strategy;
+    private CurrencyStrategy strategy;
 
     /**
      * Displays bucket
