@@ -11,11 +11,11 @@
 </h1>
 
 <h2>
-    <a href="/shop/createProduct">Add New Product</a>
+    <a href="/shop/products/insert">Add New Product</a>
     &nbsp;&nbsp;&nbsp;
-    <a href="/shop/productList">Product List</a>
+    <a href="/shop/products">Product List</a>
     &nbsp;&nbsp;&nbsp;
-    <a href="/shop/bucketList">Bucket List</a>
+    <a href="/shop/bucket">Bucket List</a>
     &nbsp;
     <a href="/shop/logout">Log Out</a>
 
