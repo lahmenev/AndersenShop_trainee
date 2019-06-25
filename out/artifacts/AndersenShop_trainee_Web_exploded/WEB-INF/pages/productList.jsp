@@ -7,14 +7,13 @@
 </head>
 <body>
 <center>
+    <h1>Test Shop</h1>
     <h2>
-        <a href="/shop/products/insert">Add New Product</a>
+        <a href="/shop/new">Add New Product</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/shop/products">Product List</a>
+        <a href="/shop/list">Product List</a>
         &nbsp;&nbsp;&nbsp;
         <a href="/shop/bucket">Bucket List</a>
-        &nbsp;
-        <a href="/shop/logout">Log Out</a>
 
     </h2>
 </center>
@@ -26,23 +25,23 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Currency</th>
+                <th>Currancy</th>
                 <th>Price</th>
                 <th>Amount</th>
                 <th>Action</th>
             </tr>
             <tbody>
-            <c:forEach items="${productList}" var="p">
+            <c:forEach items="${allProducts}" var="p">
                 <tr>
                     <td>${p.id}</td>
                     <td>${p.name}</td>
-                    <td>${p.currency}</td>
+                    <td>${p.currancy}</td>
                     <td>${p.price}</td>
                     <td>${p.amount}</td>
                     <td>
-                        <a href="/shop/addToBucket/${p.id}&${p.name}&${p.currency}&${p.price}&${p.amount}">Add to bucket</a>
+                        <a href="/shop/addBucket?id=${p.id}">Add to bucket</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/shop/products/${p.id}">Delete</a>
+                        <a href="/shop/delete?id=${p.id}">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

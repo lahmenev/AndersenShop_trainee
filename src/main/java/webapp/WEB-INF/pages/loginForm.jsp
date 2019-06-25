@@ -9,19 +9,14 @@
 <body>
 <h1>Login form</h1>
 <div>
-    <form:form action="login" modelAttribute="user" method="post" >
-        <table style="width: 50%" >
-            <tr>
-                <td>Login</td>
-                <td><form:input path="name" /></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><form:input path="password" /></td>
-            </tr>
-        </table>
-        <input type="submit" value="SignIn" />
-    </form:form>
+    <form action="login" method="post">
+        <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="SignIn"/></div>
+    </form>
+
+    <a href="/shop/registration">Registration</a>
+
 </div>
 </body>
 </html>
