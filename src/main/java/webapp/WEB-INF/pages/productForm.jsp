@@ -39,6 +39,12 @@
                 </td>
             </tr>
             <tr>
+                <th>Country: </th>
+                <td>
+                    <form:input path="country.nameCountry"/>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save" />
                 </td>
