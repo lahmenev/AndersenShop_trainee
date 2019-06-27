@@ -9,7 +9,7 @@
 <h1>Login form</h1>
 <div>
     <form action="signIn" method="post">
-        <table style="width: 50%" >
+        <table style="width: 50%">
             <tr>
                 <td>Login</td>
                 <td><input type="text" username="username" /></td>
