@@ -11,7 +11,9 @@
 </h1>
 
 <h2>
-    <a href="/shop/products/insert">Add New Product</a>
+    <a href="/shop/products/eatable_product/insert">Add new food product</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="/shop/products/uneatable_product/insert">Add new non food product</a>
     &nbsp;&nbsp;&nbsp;
     <a href="/shop/products">Product List</a>
     &nbsp;&nbsp;&nbsp;
