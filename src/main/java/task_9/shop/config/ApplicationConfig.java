@@ -34,11 +34,17 @@ import java.util.Properties;
 @ComponentScan("task_9.shop.*")
 public class ApplicationConfig {
 
+    @Value("${spring.datasource.driverClassName}")
+    private String driverClassName;
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String userName;
+    @Value("${spring.datasource.password}")
+    private String password;
+
     @Autowired
     private Environment env;
-
-    public ApplicationConfig() {
-    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -64,6 +70,11 @@ public class ApplicationConfig {
     }
 
     @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
     public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
@@ -74,20 +85,6 @@ public class ApplicationConfig {
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Value("${spring.datasource.driverClassName}")
-    private String driverClassName;
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    private String userName;
-    @Value("${spring.datasource.password}")
-    private String password;
 
     @Bean
     public DriverManagerDataSource getDataSource() {
