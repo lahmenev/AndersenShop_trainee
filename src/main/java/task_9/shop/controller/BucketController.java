@@ -16,7 +16,7 @@ import task_9.shop.model.entity.Country;
 import task_9.shop.model.entity.EatableProduct;
 import task_9.shop.model.entity.UnEatableProduct;
 import task_9.shop.service.BucketService;
-import task_9.shop.service.StockService;
+import task_9.shop.service.ProductService;
 
 /**
  * email : s.lakhmenev@andersenlab.com
@@ -32,7 +32,10 @@ public class BucketController {
     BucketService bucketService;
 
     @Autowired
-    StockService stockService;
+    ProductService<EatableProduct> eatableProductService;
+
+    @Autowired
+    ProductService<UnEatableProduct> unEatableProductService;
 
     /**
      * Shows products in bucket
@@ -58,7 +61,7 @@ public class BucketController {
     public ModelAndView showAddToBucketUneatableForm(@PathVariable int id, @PathVariable String name,
                                                      @PathVariable String currency, @PathVariable int price,
                                                      @PathVariable int amount, @PathVariable String nameCountry) {
-        return new ModelAndView("forms/addToBucketUneatableForm",
+        return new ModelAndView("addToBucketUneatableForm",
                 "uneatableProduct", new UnEatableProduct(id, name, currency, price, amount, new Country(nameCountry)));
     }
 
@@ -72,7 +75,7 @@ public class BucketController {
                                                    @PathVariable String currency, @PathVariable int price,
                                                    @PathVariable int amount, @PathVariable String nameCountry,
                                                    @PathVariable String shelfLife) {
-        return new ModelAndView("forms/addToBucketEatableForm",
+        return new ModelAndView("addToBucketEatableForm",
                 "eatableProduct", new EatableProduct(id, name, currency, price, amount, new Country(nameCountry), shelfLife));
     }
 
@@ -89,7 +92,7 @@ public class BucketController {
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
 
         try {
-            stockService.addToBucketEatableProduct(product, userDetail.getUsername());
+            eatableProductService.addToBucketProduct(product, userDetail.getUsername());
         } catch (ProductTransactionException e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
             return "addToBucketEatableForm";
@@ -111,7 +114,7 @@ public class BucketController {
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
 
         try {
-            stockService.addToBucketUnEatableProduct(product, userDetail.getUsername());
+            unEatableProductService.addToBucketProduct(product, userDetail.getUsername());
         } catch (ProductTransactionException e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
             return "addToBucketUneatableForm";

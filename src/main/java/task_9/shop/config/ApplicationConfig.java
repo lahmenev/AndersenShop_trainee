@@ -17,9 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import task_9.shop.service.implement.BucketServiceImpl;
-import task_9.shop.service.implement.StockServiceImpl;
-import task_9.shop.service.implement.UserServiceImpl;
+import task_9.shop.service.implement.*;
 import javax.persistence.EntityManagerFactory;
 import java.util.Properties;
 
@@ -115,14 +113,20 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public StockServiceImpl getStockService() {
-        StockServiceImpl stockServiceImpl = new StockServiceImpl();
-        return stockServiceImpl;
-    }
-
-    @Bean
     public UserServiceImpl getUserService() {
         UserServiceImpl userServiceImpl = new UserServiceImpl();
         return userServiceImpl;
+    }
+
+    @Bean
+    public EatableProductServiceImpl getEatableProductService() {
+        EatableProductServiceImpl eatableProductService = new EatableProductServiceImpl();
+        return eatableProductService;
+    }
+
+    @Bean
+    public UnEatableProductServiceImpl getUnEatableProductService() {
+        UnEatableProductServiceImpl unEatableProductService = new UnEatableProductServiceImpl();
+        return unEatableProductService;
     }
 }

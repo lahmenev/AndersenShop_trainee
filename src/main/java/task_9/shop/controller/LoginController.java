@@ -28,7 +28,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView showRegistrationForm() {
-        return new ModelAndView("forms/registrationForm", "user", new User());
+        return new ModelAndView("registrationForm", "user", new User());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
