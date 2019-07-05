@@ -23,6 +23,8 @@
             <th>Currency</th>
             <th>Price</th>
             <th>Amount</th>
+            <th>Country</th>
+            <th>Shelf life</th>
             <th>Sum</th>
         </tr>
         <tbody>
@@ -33,6 +35,8 @@
                 <td>${item.currency}</td>
                 <td>${item.price}</td>
                 <td>${item.amount}</td>
+                <td>${item.country.nameCountry}</td>
+                <td>${item.shelfLife}</td>
                 <td>${item.sum}</td>
             </tr>
         </c:forEach>
