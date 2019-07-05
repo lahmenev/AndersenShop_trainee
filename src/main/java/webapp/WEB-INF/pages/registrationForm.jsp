@@ -13,7 +13,7 @@
         <table style="width: 30%">
             <tr>
                 <td>Login</td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="username" /></td>
             </tr>
             <tr>
                 <td>Password</td>

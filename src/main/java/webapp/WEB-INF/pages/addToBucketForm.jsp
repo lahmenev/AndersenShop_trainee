@@ -11,7 +11,7 @@
 </center>
 <div>
 
-    <form:form action="insert" modelAttribute="product" method="post">
+    <form:form action="/shop/bucket/insert" modelAttribute="product" method="post">
         <table border="1" cellpadding="5">
             <caption><h2>Adding product</h2></caption>
             <tr>

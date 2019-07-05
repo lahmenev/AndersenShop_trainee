@@ -29,6 +29,8 @@
                 <th>Currency</th>
                 <th>Price</th>
                 <th>Amount</th>
+                <th>Country</th>
+
                 <th>Action</th>
             </tr>
             <tbody>
@@ -39,10 +41,13 @@
                     <td>${p.currency}</td>
                     <td>${p.price}</td>
                     <td>${p.amount}</td>
+                    <td>${p.country.nameCountry}</td>
                     <td>
-                        <a href="/shop/addToBucket/${p.id}&${p.name}&${p.currency}&${p.price}&${p.amount}">Add to bucket</a>
+                        <a href="/shop/bucket/insert/${p.id}&${p.name}&${p.currency}&${p.price}&${p.amount}&${p.country.nameCountry}">Add to bucket</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/shop/products/${p.id}">Delete</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/shop/products/product-info/${p.id}">Product information</a>
                     </td>
                 </tr>
             </c:forEach>
